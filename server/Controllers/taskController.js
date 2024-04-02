@@ -36,11 +36,9 @@ const getAllTasks = async (req, res) => {
 
 const getTaskByTaskId = async (req, res) => {
   const taskId = req.params.taskId;
-  console.log("taskId", taskId);
 
   try {
-    const task = await Task.findById({ taskId });
-    console.log("Retrieved task:", task);
+    const task = await Task.findById(taskId);
     if (!task) {
       return res.status(404).json({ message: "Task not found" });
     }
