@@ -69,6 +69,7 @@ const loginUser = async (req, res) => {
 
     // If email and password are correct, generate JWT token
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY);
+    console.log("token from login:", token);
     res.status(200).json({
       _id: user._id,
       first_name: user.first_name,
