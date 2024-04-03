@@ -10,7 +10,7 @@ const Navbar = () => {
     logoutUser();
   };
   return (
-    <div className="flex justify-between items-center px-10 py-5 bg-slate-500">
+    <div className="flex justify-between items-center text-white font-bold px-10 py-5 bg-slate-800">
       <div>
         <a href="/">Logo</a>
       </div>
