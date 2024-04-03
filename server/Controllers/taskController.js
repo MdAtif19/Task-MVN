@@ -49,4 +49,47 @@ const getTaskByTaskId = async (req, res) => {
   }
 };
 
-module.exports = { createTask, getTasksByUserId, getAllTasks, getTaskByTaskId };
+const deleteTaskById = async (req, res) => {
+  const taskId = req.params.taskId;
+
+  try {
+    const deletedTask = await Task.findByIdAndDelete(taskId);
+    if (!deletedTask) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+    res
+      .status(200)
+      .json({ message: "Task deleted successfully", task: deletedTask });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
+
+const updateTaskById = async (req, res) => {
+  const taskId = req.params.taskId;
+
+  try {
+    const updatedTask = await Task.findByIdAndUpdate(taskId, req.body, {
+      new: true,
+    });
+    if (!updatedTask) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+    res
+      .status(200)
+      .json({ message: "Task updated successfully", task: updatedTask });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
+
+module.exports = {
+  createTask,
+  getTasksByUserId,
+  getAllTasks,
+  getTaskByTaskId,
+  deleteTaskById,
+  updateTaskById,
+};
