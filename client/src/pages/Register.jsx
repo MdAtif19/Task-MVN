@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigateTo = useNavigate();
   const {
     registerInfo,
     updateRegisterInfo,
@@ -19,6 +20,8 @@ const Register = () => {
     e.preventDefault();
     try {
       await registerUser(e);
+      // Redirect to login page after successful registration
+      navigateTo("/login");
     } catch (error) {
       console.error("Registration failed:", error);
     }
