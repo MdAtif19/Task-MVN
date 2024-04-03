@@ -1,29 +1,32 @@
 import React from "react";
-import Sidebar from "./Sidebar";
-import AllTasks from "./AllTasks";
-import Completed from "./Completed";
-import Incomplete from "./Incomplete";
-import { Routes, Route } from "react-router-dom";
-import Home from "./Home";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
-    <div className="flex h-screen bg-slate-500 p-5">
-      {/* Sidebar */}
-      <div className="bg-gray-400 ml-5">
-        <Sidebar />
-      </div>
+    <>
+      <header className="flex justify-between items-center px-10 py-5 bg-slate-500">
+        <div>
+          <a href="/">Logo</a>
+        </div>
+        <nav>
+          <div className="flex gap-5 ">
+            <ul>
+              <Link to="/all-tasks">All Task</Link>
+            </ul>
+            <ul>
+              <Link to="/completed">completed</Link>
+            </ul>
+            <ul>
+              <Link to="/incomplete">Incomplete</Link>
+            </ul>
+          </div>
+        </nav>
+      </header>
 
-      {/* Content */}
-      <div className="flex-grow bg-cyan-300 ml-5">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="all-tasks" element={<AllTasks />} />
-          <Route path="completed" element={<Completed />} />
-          <Route path="incomplete" element={<Incomplete />} />
-        </Routes>
-      </div>
-    </div>
+      <section>
+        <h1>All Task Here</h1>
+      </section>
+    </>
   );
 };
 
