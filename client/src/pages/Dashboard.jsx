@@ -17,14 +17,15 @@ const Dashboard = () => {
   const [newTaskDescription, setNewTaskDescription] = useState("");
   const [newTaskStatus, setNewTaskStatus] = useState("incomplete");
   const [updateTaskId, setUpdateTaskId] = useState(null);
-  const [selectedTaskId, setSelectedTaskId] = useState("");
+  // const [selectedTaskId, setSelectedTaskId] = useState("");
+  const [selectedTaskToUpdate, setSelectedTaskToUpdate] = useState(null);
 
   console.log("current Users all task:", userTasks);
-  console.log("selectedTaskId :", selectedTaskId);
+  // console.log("selectedTaskId :", selectedTaskId);
 
   useEffect(() => {
     if (user?._id) {
-      const filteredTasks = tasks.filter((task) => task.userId === user._id);
+      const filteredTasks = tasks?.filter((task) => task.userId === user._id);
       setUserTasks(filteredTasks);
     }
   }, [tasks, user]);
@@ -54,24 +55,35 @@ const Dashboard = () => {
     }
   };
 
-  // const handleUpdateTask = async (taskId) => {
-  //   console.log("Need to update taskId", taskId);
-  //   // Find the task to update
-  //   const taskToUpdate = userTasks.find((task) => task._id === taskId);
-  //   console.log("taskToUpdate:", taskToUpdate);
-  //   if (!taskToUpdate) {
-  //     console.error("Task not found for taskId:", taskId);
-  //     return;
-  //   }
-  // };
-
-  const handleUpdateTask = (taskId) => {
-    // Set the taskId in state
-    setUpdateTaskId(taskId);
-    console.log("selected taskId ", taskId);
-    setSelectedTaskId();
-    // Show the modal
+  const handleUpdateTask = (task) => {
+    setSelectedTaskToUpdate(task);
     setUpdateModalVisible(true);
+  };
+
+  const handleSubmitUpdate = async (updateTaskDetails) => {
+    try {
+      const response = await axios.put(
+        `${baseUrl}/tasks/${selectedTaskToUpdate._id}`,
+        updateTaskDetails
+      );
+      console.log("Updated task:", response.data);
+      // Update the userTasks state with the updated task
+      setUserTasks((prevUserTasks) => {
+        return prevUserTasks.map((task) => {
+          if (task._id === response.data._id) {
+            return response.data;
+          } else {
+            return task;
+          }
+        });
+      });
+      // setUserTasks(updatedUserTasks);
+      setUpdateModalVisible(false);
+      // You can update the state or fetch updated data here if needed
+    } catch (error) {
+      console.error("Error updating task:", error);
+      // Handle error, e.g., show an error message
+    }
   };
 
   return (
@@ -111,7 +123,7 @@ const Dashboard = () => {
                   </p>
                   <div className="flex justify-end mt-2">
                     <button
-                      onClick={() => handleUpdateTask(task._id)} // Call handleUpdateTask with task ID
+                      onClick={() => handleUpdateTask(task)} // Call handleUpdateTask with task ID
                       className="text-blue-600 font-semibold mt-2 mr-2"
                     >
                       Update
@@ -177,14 +189,10 @@ const Dashboard = () => {
       {updateModalVisible && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center">
           <UpdateTaskForm
-            userId={user._id}
-            taskToUpdate={userTasks.find((task) => task._id === updateTaskId)}
-            onSubmit={(updateTaskDetails) => {
-              // Submit the updated task details
-              console.log("Updated task details:", updateTaskDetails);
-              // Hide the modal
-              setUpdateModalVisible(false);
-            }}
+            key={updateModalVisible}
+            taskToUpdate={selectedTaskToUpdate}
+            userId={{ _id: user._id }}
+            onSubmit={handleSubmitUpdate}
             onCancel={() => setUpdateModalVisible(false)}
           />
         </div>

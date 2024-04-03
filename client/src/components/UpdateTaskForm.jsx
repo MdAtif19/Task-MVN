@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types"; // Import PropTypes
-import axios from "axios";
 
-const UpdateTaskForm = ({ taskToUpdate, onSubmit, onCancel, userId }) => {
+const UpdateTaskForm = ({ taskToUpdate, onSubmit, onCancel }) => {
   const [updateTaskDetails, setUpdateTaskDetails] = useState({
     title: taskToUpdate.title,
-    userId: userId,
     des: taskToUpdate.des,
     status: taskToUpdate.status,
   });
@@ -20,20 +18,6 @@ const UpdateTaskForm = ({ taskToUpdate, onSubmit, onCancel, userId }) => {
     });
   };
 
-  const handleSubmit = async () => {
-    try {
-      // Send PUT request to update the task
-      const response = await axios.put(
-        `https://task-management-api-rust.vercel.app/api/tasks/${taskToUpdate._id}`,
-        updateTaskDetails
-      );
-      console.log("Updated task:", response.data);
-      onSubmit(); // Call onSubmit function provided via props
-    } catch (error) {
-      console.error("Error updating task:", error);
-      // Handle error, e.g., show an error message
-    }
-  };
   return (
     <div className="bg-white p-8 rounded-md">
       <h2 className="text-lg font-bold mb-4">Update Task</h2>
@@ -69,7 +53,7 @@ const UpdateTaskForm = ({ taskToUpdate, onSubmit, onCancel, userId }) => {
           Cancel
         </button>
         <button
-          onClick={handleSubmit}
+          onClick={() => onSubmit(updateTaskDetails)}
           className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md"
         >
           Update
