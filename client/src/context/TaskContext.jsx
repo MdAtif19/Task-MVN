@@ -17,6 +17,8 @@ export const TaskContextProvider = ({ children }) => {
     status: "incomplete",
   });
 
+  console.log("tasks from TaskContext:", tasks);
+
   const showToast = useCallback((message) => {
     toast.success(message, {
       position: "top-right",
