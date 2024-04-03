@@ -9,22 +9,28 @@ import Completed from "./pages/Completed";
 import Incomplete from "./pages/Incomplete";
 import AllTasks from "./pages/AllTasks";
 import { AuthContext } from "./context/AuthContext";
+import { TaskContextProvider } from "./context/TaskContext";
 
 const App = () => {
   const { user } = useContext(AuthContext);
   console.log("authContextData:", user);
   return (
     <>
-      <Routes>
-        <Route path="/" element={user ? <Dashboard /> : <Login />} />
-        <Route path="/register" element={user ? <Dashboard /> : <Register />} />
-        <Route path="/login" element={user ? <Login /> : <Login />} />
-        <Route path="*" element={<Navigate to="/" />} />
+      <TaskContextProvider>
+        <Routes>
+          <Route path="/" element={user ? <Dashboard /> : <Login />} />
+          <Route
+            path="/register"
+            element={user ? <Dashboard /> : <Register />}
+          />
+          <Route path="/login" element={user ? <Login /> : <Login />} />
+          <Route path="*" element={<Navigate to="/" />} />
 
-        <Route path="/all-tasks" element={<AllTasks />} />
-        <Route path="/completed" element={<Completed />} />
-        <Route path="/incomplete" element={<Incomplete />} />
-      </Routes>
+          <Route path="/all-tasks" element={<AllTasks />} />
+          <Route path="/completed" element={<Completed />} />
+          <Route path="/incomplete" element={<Incomplete />} />
+        </Routes>
+      </TaskContextProvider>
     </>
   );
 };
