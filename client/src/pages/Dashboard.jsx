@@ -20,8 +20,7 @@ const Dashboard = () => {
   // const [selectedTaskId, setSelectedTaskId] = useState("");
   const [selectedTaskToUpdate, setSelectedTaskToUpdate] = useState(null);
 
-  console.log("current Users all task:", userTasks);
-  // console.log("selectedTaskId :", selectedTaskId);
+  console.log("current User's all task:", userTasks);
 
   useEffect(() => {
     if (user?._id) {
@@ -82,7 +81,6 @@ const Dashboard = () => {
       // You can update the state or fetch updated data here if needed
     } catch (error) {
       console.error("Error updating task:", error);
-      // Handle error, e.g., show an error message
     }
   };
 
@@ -123,7 +121,7 @@ const Dashboard = () => {
                   </p>
                   <div className="flex justify-end mt-2">
                     <button
-                      onClick={() => handleUpdateTask(task)} // Call handleUpdateTask with task ID
+                      onClick={() => handleUpdateTask(task)}
                       className="text-blue-600 font-semibold mt-2 mr-2"
                     >
                       Update
@@ -185,7 +183,6 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* Render the UpdateTaskForm component only when modalVisible is true */}
       {updateModalVisible && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center">
           <UpdateTaskForm

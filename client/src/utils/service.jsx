@@ -34,7 +34,6 @@ export const postRequest = async (url, body) => {
 
 export const getRequest = async (url) => {
   try {
-    console.log("Request url:", url);
     const response = await fetch(url);
 
     const data = await response.json();

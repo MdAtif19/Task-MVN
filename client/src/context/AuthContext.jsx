@@ -59,8 +59,6 @@ export const AuthContextProvider = ({ children }) => {
         JSON.stringify(registerInfo)
       );
 
-      console.log("responseresponseresponse:", response);
-
       setIsRegisterLoading(false);
 
       if (response.error) {

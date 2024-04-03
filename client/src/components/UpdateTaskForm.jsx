@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types"; // Import PropTypes
+import PropTypes from "prop-types";
 
 const UpdateTaskForm = ({ taskToUpdate, onSubmit, onCancel }) => {
   const [updateTaskDetails, setUpdateTaskDetails] = useState({
@@ -7,8 +7,6 @@ const UpdateTaskForm = ({ taskToUpdate, onSubmit, onCancel }) => {
     des: taskToUpdate.des,
     status: taskToUpdate.status,
   });
-
-  console.log("updateTaskDetails from formModal:", updateTaskDetails);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

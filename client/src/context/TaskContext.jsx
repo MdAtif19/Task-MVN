@@ -1,9 +1,6 @@
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { getRequest, postRequest, baseUrl } from "../utils/service";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 
 export const TaskContext = createContext();
 
@@ -19,19 +16,7 @@ export const TaskContextProvider = ({ children }) => {
 
   console.log("tasks from TaskContext:", tasks);
 
-  const showToast = useCallback((message) => {
-    toast.success(message, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
-  }, []);
-
   useEffect(() => {
-    // Fetch tasks from the server when the component mounts
     fetchTasks();
   }, []);
 
@@ -40,7 +25,6 @@ export const TaskContextProvider = ({ children }) => {
     setTaskError(null);
 
     try {
-      // Make a GET request to fetch all tasks
       const response = await getRequest(`${baseUrl}/tasks`);
       setTasks(response);
     } catch (error) {
@@ -59,17 +43,14 @@ export const TaskContextProvider = ({ children }) => {
     setTaskError(null);
 
     try {
-      // Make a POST request to create a new task
       const response = await postRequest(`${baseUrl}/tasks`, taskInfo);
-      // Add the newly created task to the tasks state
       setTasks([...tasks, response]);
-      showToast("Task created successfully!");
     } catch (error) {
       setTaskError(error);
     }
 
     setIsTaskLoading(false);
-  }, [taskInfo, tasks, showToast]);
+  }, [taskInfo, tasks]);
 
   return (
     <TaskContext.Provider
@@ -82,7 +63,6 @@ export const TaskContextProvider = ({ children }) => {
         isTaskLoading,
       }}
     >
-      <ToastContainer />
       {children}
     </TaskContext.Provider>
   );
