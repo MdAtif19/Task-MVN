@@ -26,6 +26,10 @@ const Completed = () => {
           <p>Loading tasks...</p>
         ) : taskError ? (
           <p>Error fetching tasks: {taskError.message}</p>
+        ) : filteredTasks.length === 0 ? (
+          <p className="text-white text-center mt-8 font-bold text-3xl">
+            No completed tasks found.
+          </p>
         ) : (
           <div className="flex flex-wrap justify-center gap-5 mt-16">
             {filteredTasks.map((task) => (

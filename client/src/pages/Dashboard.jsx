@@ -104,6 +104,10 @@ const Dashboard = () => {
           <p>Loading tasks...</p>
         ) : taskError ? (
           <p>Error fetching tasks: {taskError.message}</p>
+        ) : userTasks.length === 0 ? (
+          <p className="text-white text-center text-3xl font-bold">
+            Make your first Task
+          </p>
         ) : (
           <div className="flex flex-wrap justify-center gap-5">
             {userTasks?.map((task) => (
