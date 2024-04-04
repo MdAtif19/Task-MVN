@@ -23,8 +23,6 @@ const Dashboard = () => {
   // const [selectedTaskId, setSelectedTaskId] = useState("");
   const [selectedTaskToUpdate, setSelectedTaskToUpdate] = useState(null);
 
-  console.log("current User's all task:", userTasks);
-
   useEffect(() => {
     if (user?._id) {
       const filteredTasks = tasks?.filter((task) => task.userId === user._id);

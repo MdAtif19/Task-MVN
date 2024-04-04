@@ -14,7 +14,6 @@ import Profile from "./pages/Profile";
 
 const App = () => {
   const { user } = useContext(AuthContext);
-  console.log("authContextData:", user);
   return (
     <>
       <TaskContextProvider>

@@ -14,8 +14,6 @@ export const TaskContextProvider = ({ children }) => {
     status: "incomplete",
   });
 
-  console.log("tasks from TaskContext:", tasks);
-
   useEffect(() => {
     fetchTasks();
   }, []);

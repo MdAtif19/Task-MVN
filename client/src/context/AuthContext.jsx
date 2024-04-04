@@ -25,8 +25,6 @@ export const AuthContextProvider = ({ children }) => {
     password: "",
   });
 
-  console.log("user from AuthContext:", user);
-
   const showToast = useCallback((message) => {
     toast.success(message, {
       position: "top-right",
