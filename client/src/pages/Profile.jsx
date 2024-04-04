@@ -7,7 +7,7 @@ const Profile = () => {
   return (
     <>
       <Navbar />
-      <section className="px-4 py-8 bg-[#292928] h-screen">
+      <section className="px-4 py-8 bg-[#292928] h-screen mt-16">
         <div className="max-w-lg mx-auto bg-white shadow-md rounded-lg overflow-hidden">
           <div className="px-4 py-4">
             <div className="text-center">
