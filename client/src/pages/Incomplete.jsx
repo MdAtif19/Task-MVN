@@ -17,7 +17,7 @@ const Incomplete = () => {
   return (
     <>
       <Navbar />
-      <section className="px-10 py-8 bg-[#292928] min-h-screen">
+      <section className="px-10 py-8 bg-[#292928] min-h-screen mt-16">
         <span className="font-bold text-2xl text-white px-10 flex mt-3">
           Incomplete Tasks
         </span>

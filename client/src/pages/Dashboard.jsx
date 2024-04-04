@@ -93,7 +93,7 @@ const Dashboard = () => {
   return (
     <>
       <Navbar />
-      <section className="px-10 py-8 bg-[#292928] min-h-screen">
+      <section className="px-10 py-8 bg-[#292928] min-h-screen mt-16">
         <div className="flex justify-between items-center px-10 mb-10">
           <span className="font-bold text-2xl text-white">All Tasks</span>
           <button

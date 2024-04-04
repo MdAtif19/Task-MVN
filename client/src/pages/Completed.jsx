@@ -18,7 +18,7 @@ const Completed = () => {
   return (
     <>
       <Navbar />
-      <section className="px-10 py-8 bg-[#292928] min-h-screen">
+      <section className="px-10 py-8 bg-[#292928] min-h-screen mt-16">
         <span className="font-bold text-2xl text-white flex px-12 mt-2">
           Completed Tasks
         </span>
