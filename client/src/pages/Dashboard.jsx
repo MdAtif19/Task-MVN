@@ -9,6 +9,8 @@ import UpdateTaskForm from "../components/UpdateTaskForm";
 import { GrDocumentUpdate } from "react-icons/gr";
 import { MdDeleteForever } from "react-icons/md";
 import { MdCreateNewFolder } from "react-icons/md";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Dashboard = () => {
   const { tasks, isTaskLoading, taskError, setTasks } = useContext(TaskContext);
@@ -52,6 +54,7 @@ const Dashboard = () => {
       });
       setUserTasks([...userTasks, response.data]);
       setModalVisible(false);
+      toast.success("Task created successfully!");
     } catch (error) {
       console.error("Error creating task:", error);
     }
@@ -62,6 +65,7 @@ const Dashboard = () => {
       await axios.delete(`${baseUrl}/tasks/${taskId}`);
       const updatedTasks = userTasks.filter((task) => task._id !== taskId);
       setUserTasks(updatedTasks);
+      toast.success("Task deleted successfully!");
     } catch (error) {
       console.error("Error deleting task:", error);
     }
@@ -80,11 +84,14 @@ const Dashboard = () => {
       );
       console.log("Updated task:", response.data);
 
-      // Reload the page after successful update
-      window.location.reload();
       // setUserTasks(updatedUserTasks);
       setUpdateModalVisible(false);
-      // You can update the state or fetch updated data here if needed
+      toast.success("Task updated successfully!");
+
+      // Delay the page reload by 1 second
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } catch (error) {
       console.error("Error updating task:", error);
     }
@@ -92,6 +99,7 @@ const Dashboard = () => {
 
   return (
     <>
+      <ToastContainer />
       <Navbar />
       <section className="px-10 py-8 bg-[#292928] min-h-screen mt-16">
         <div className="flex justify-between items-center px-10 mb-10">
