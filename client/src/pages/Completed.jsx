@@ -12,7 +12,7 @@ const Completed = () => {
 
   // Filter tasks based on user's _id
   const filteredTasks = tasks.filter(
-    (task) => task.userId === user._id && task.status === "complete"
+    (task) => task.userId === user?._id && task.status === "complete"
   );
 
   return (

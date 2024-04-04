@@ -24,13 +24,16 @@ const App = () => {
             path="/register"
             element={user ? <Dashboard /> : <Register />}
           />
-          <Route path="/login" element={user ? <Login /> : <Login />} />
+          <Route path="/login" element={user ? <Dashboard /> : <Login />} />
           <Route path="*" element={<Navigate to="/" />} />
 
           <Route path="/all-tasks" element={<AllTasks />} />
-          <Route path="/completed" element={<Completed />} />
-          <Route path="/incomplete" element={<Incomplete />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/completed" element={user ? <Completed /> : <Login />} />
+          <Route
+            path="/incomplete"
+            element={user ? <Incomplete /> : <Login />}
+          />
+          <Route path="/profile" element={user ? <Profile /> : <Login />} />
         </Routes>
       </TaskContextProvider>
     </>

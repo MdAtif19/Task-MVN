@@ -153,16 +153,25 @@ const Register = () => {
           </div>
         </form>
 
-        <div className="mt-4">
-          {registerError && (
+        <div className="">
+          {/* {registerError && (
             <p className="text-red-500 mt-2">{registerError?.message}</p>
-          )}
-          <span>
-            I already have an Account!{" "}
-            <span className="text-blue-500 ml-3">
-              {!registerError && <Link to="/login">Login</Link>}
-            </span>{" "}
-          </span>
+          )} */}
+
+          <div>
+            <span className="text-red-600 ">
+              Password must be Strong. At least, Upper case, Lower case, Number
+              , One special Character , Length will be 8+
+            </span>
+          </div>
+          <div>
+            <span className="">
+              I already have an Account!{" "}
+              <span className="text-blue-500 ml-3">
+                {!registerError && <Link to="/login">Login</Link>}
+              </span>{" "}
+            </span>
+          </div>
         </div>
       </div>
     </div>
