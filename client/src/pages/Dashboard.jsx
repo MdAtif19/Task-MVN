@@ -67,16 +67,9 @@ const Dashboard = () => {
         updateTaskDetails
       );
       console.log("Updated task:", response.data);
-      // Update the userTasks state with the updated task
-      setUserTasks((prevUserTasks) => {
-        return prevUserTasks.map((task) => {
-          if (task._id === response.data._id) {
-            return response.data;
-          } else {
-            return task;
-          }
-        });
-      });
+
+      // Reload the page after successful update
+      window.location.reload();
       // setUserTasks(updatedUserTasks);
       setUpdateModalVisible(false);
       // You can update the state or fetch updated data here if needed
