@@ -12,6 +12,8 @@ const Register = () => {
     isRegisterLoading,
   } = useContext(AuthContext);
 
+  console.log("registerError:", registerError);
+
   const handleChange = (e) => {
     updateRegisterInfo({ ...registerInfo, [e.target.name]: e.target.value });
   };
@@ -20,10 +22,14 @@ const Register = () => {
     e.preventDefault();
     try {
       await registerUser(e);
-      // Redirect to login page after successful registration
-      navigateTo("/login");
+      // Check if there are any errors before navigating to /login
+      if (!registerError) {
+        // Redirect to login page after successful registration
+        navigateTo("/login");
+      }
     } catch (error) {
       console.error("Registration failed:", error);
+      console.error("Registration failed:", error.message);
     }
   };
 
@@ -148,10 +154,13 @@ const Register = () => {
         </form>
 
         <div className="mt-4">
+          {registerError && (
+            <p className="text-red-500 mt-2">{registerError?.message}</p>
+          )}
           <span>
             I already have an Account!{" "}
             <span className="text-blue-500 ml-3">
-              <Link to="/login">Login</Link>
+              {!registerError && <Link to="/login">Login</Link>}
             </span>{" "}
           </span>
         </div>

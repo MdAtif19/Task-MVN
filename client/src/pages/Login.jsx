@@ -7,6 +7,8 @@ const Login = () => {
   const { loginInfo, updateLoginInfo, loginUser, loginError, isLoginLoading } =
     useContext(AuthContext);
 
+  console.log("loginError from login page:", loginError);
+
   const handleChange = (e) => {
     updateLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
   };
@@ -79,13 +81,20 @@ const Login = () => {
           </div>
         </form>
 
-        <div className="mt-4">
-          <span>
+        <div className="mt-4 grid justify-center items-center">
+          {loginError && (
+            <p className="text-red-500 mt-2">{loginError.message}</p>
+          )}
+          <span className="mt-4">
             Dont have an account?{" "}
             <span className="text-blue-500 ml-3">
               <Link to="/register">Register</Link>
             </span>{" "}
           </span>
+        </div>
+        <div className="bg-gray-100 px-5 py-2">
+          <p>Email: taufiq@gmail.com</p>
+          <p>Password: Diu123456789@</p>
         </div>
       </div>
     </div>
