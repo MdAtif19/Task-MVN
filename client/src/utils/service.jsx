@@ -2,8 +2,6 @@ export const baseUrl = "https://task-management-api-rust.vercel.app/api";
 
 export const postRequest = async (url, body) => {
   try {
-    console.log("Request Body:", body);
-    console.log("Request url:", url);
     const response = await fetch(url, {
       method: "POST",
       headers: {
