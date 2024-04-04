@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Register = () => {
-  const navigateTo = useNavigate();
   const {
     registerInfo,
     updateRegisterInfo,
@@ -12,7 +11,7 @@ const Register = () => {
     isRegisterLoading,
   } = useContext(AuthContext);
 
-  console.log("registerError:", registerError);
+  console.log("registerError", registerError);
 
   const handleChange = (e) => {
     updateRegisterInfo({ ...registerInfo, [e.target.name]: e.target.value });
@@ -22,11 +21,6 @@ const Register = () => {
     e.preventDefault();
     try {
       await registerUser(e);
-      // Check if there are any errors before navigating to /login
-      if (!registerError) {
-        // Redirect to login page after successful registration
-        navigateTo("/login");
-      }
     } catch (error) {
       console.error("Registration failed:", error);
       console.error("Registration failed:", error.message);
@@ -154,22 +148,16 @@ const Register = () => {
         </form>
 
         <div className="">
-          {/* {registerError && (
+          {registerError && (
             <p className="text-red-500 mt-2">{registerError?.message}</p>
-          )} */}
+          )}
 
-          <div>
-            <span className="text-red-600 ">
-              Password must be Strong. At least, Upper case, Lower case, Number
-              , One special Character , Length will be 8+
-            </span>
-          </div>
-          <div>
+          <div className="mt-5">
             <span className="">
               I already have an Account!{" "}
               <span className="text-blue-500 ml-3">
-                {!registerError && <Link to="/login">Login</Link>}
-              </span>{" "}
+                <Link to="/login">Login</Link>
+              </span>
             </span>
           </div>
         </div>
