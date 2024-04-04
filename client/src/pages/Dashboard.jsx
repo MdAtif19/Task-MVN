@@ -22,6 +22,10 @@ const Dashboard = () => {
   const [updateTaskId, setUpdateTaskId] = useState(null);
   // const [selectedTaskId, setSelectedTaskId] = useState("");
   const [selectedTaskToUpdate, setSelectedTaskToUpdate] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const tasksPerPage = 9;
+
+  console.log("userTasks check for pagination", userTasks);
 
   useEffect(() => {
     if (user?._id) {
@@ -29,6 +33,14 @@ const Dashboard = () => {
       setUserTasks(filteredTasks);
     }
   }, [tasks, user]);
+
+  // Calculate the index of the first and last task for the current page
+  const indexOfLastTask = currentPage * tasksPerPage;
+  const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+  const currentTasks = userTasks.slice(indexOfFirstTask, indexOfLastTask);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleCreateTask = async () => {
     try {
@@ -101,7 +113,7 @@ const Dashboard = () => {
           </p>
         ) : (
           <div className="flex flex-wrap justify-center gap-5">
-            {userTasks?.map((task) => (
+            {currentTasks?.map((task) => (
               <div
                 key={task._id}
                 className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4"
@@ -142,6 +154,25 @@ const Dashboard = () => {
             ))}
           </div>
         )}
+
+        {/* Pagination */}
+        <div className="flex justify-center mt-5">
+          <ul className="flex list-none rounded-md">
+            {userTasks.length > tasksPerPage &&
+              Array.from({
+                length: Math.ceil(userTasks.length / tasksPerPage),
+              }).map((_, index) => (
+                <li
+                  key={index}
+                  className="px-3 py-1 mr-2 bg-gray-600 text-white rounded-md cursor-pointer"
+                >
+                  <button onClick={() => paginate(index + 1)}>
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+          </ul>
+        </div>
       </section>
 
       {modalVisible && (
