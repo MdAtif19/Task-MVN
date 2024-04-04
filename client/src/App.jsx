@@ -10,6 +10,7 @@ import Incomplete from "./pages/Incomplete";
 import AllTasks from "./pages/AllTasks";
 import { AuthContext } from "./context/AuthContext";
 import { TaskContextProvider } from "./context/TaskContext";
+import Profile from "./pages/Profile";
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/all-tasks" element={<AllTasks />} />
           <Route path="/completed" element={<Completed />} />
           <Route path="/incomplete" element={<Incomplete />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </TaskContextProvider>
     </>

@@ -6,6 +6,9 @@ import { TaskContext } from "../context/TaskContext";
 import { AuthContext } from "../context/AuthContext";
 import { baseUrl } from "../utils/service";
 import UpdateTaskForm from "../components/UpdateTaskForm";
+import { GrDocumentUpdate } from "react-icons/gr";
+import { MdDeleteForever } from "react-icons/md";
+import { MdCreateNewFolder } from "react-icons/md";
 
 const Dashboard = () => {
   const { tasks, isTaskLoading, taskError, setTasks } = useContext(TaskContext);
@@ -87,16 +90,14 @@ const Dashboard = () => {
   return (
     <>
       <Navbar />
-      <section className="px-4 py-8 bg-slate-400 h-screen">
-        <div className="flex justify-around items-center">
-          <h1 className="text-3xl font-bold mb-4">
-            Hey, {user.first_name} {user.last_name} This is your Tasks Here
-          </h1>
+      <section className="px-10 py-8 bg-[#292928] min-h-screen">
+        <div className="flex justify-between items-center px-10 mb-10">
+          <span className="font-bold text-2xl text-white">All Tasks</span>
           <button
             onClick={() => setModalVisible(true)}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="hover:bg-[#58554e] text-white text-4xl border border-gray-600 rounded-full p-2"
           >
-            Create Task
+            <MdCreateNewFolder />
           </button>
         </div>
         {isTaskLoading ? (
@@ -104,34 +105,42 @@ const Dashboard = () => {
         ) : taskError ? (
           <p>Error fetching tasks: {taskError.message}</p>
         ) : (
-          <div className="flex justify-center items-center gap-5">
-            {userTasks.map((task) => (
-              <div key={task._id} className="mb-4">
-                <div className=" bg-white shadow-md rounded-md p-4">
-                  <h2 className="text-xl font-semibold mb-2">{task.title}</h2>
-                  <p className="text-gray-600 mb-2">{task.des}</p>
-                  <p
-                    className={`text-sm font-semibold ${
-                      task.status === "complete"
-                        ? "text-green-600"
-                        : "text-red-600"
-                    }`}
-                  >
-                    {task.status}
-                  </p>
-                  <div className="flex justify-end mt-2">
-                    <button
-                      onClick={() => handleUpdateTask(task)}
-                      className="text-blue-600 font-semibold mt-2 mr-2"
-                    >
-                      Update
-                    </button>
-                    <button
-                      onClick={() => handleDeleteTask(task._id)}
-                      className="text-red-600 font-semibold mt-2"
-                    >
-                      Delete
-                    </button>
+          <div className="flex flex-wrap justify-center gap-5">
+            {userTasks?.map((task) => (
+              <div
+                key={task._id}
+                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4"
+              >
+                <div className="bg-[#4a4a48] shadow-md rounded-md p-4 text-white">
+                  <h2 className="text-xl font-semibold mb-2">{task?.title}</h2>
+                  <p className="text-white mb-2">{task?.des}</p>
+
+                  <div className="flex justify-between items-center mt-5">
+                    <div>
+                      <span
+                        className={`text-sm font-semibold ${
+                          task?.status === "complete"
+                            ? "bg-green-600 text-white rounded-full py-1 px-2 cursor-pointer"
+                            : " bg-red-500 text-white rounded-full py-1 px-2 cursor-pointer"
+                        }`}
+                      >
+                        {task?.status}
+                      </span>
+                    </div>
+                    <div className="flex justify-center items-center">
+                      <button
+                        onClick={() => handleUpdateTask(task)}
+                        className="text-white text-2xl mt-2 mr-2"
+                      >
+                        <GrDocumentUpdate />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteTask(task?._id)}
+                        className="text-red-500 text-3xl mt-2"
+                      >
+                        <MdDeleteForever />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -142,8 +151,10 @@ const Dashboard = () => {
 
       {modalVisible && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-8 rounded-md">
-            <h2 className="text-lg font-bold mb-4">Create New Task</h2>
+          <div className="bg-gray-200 p-8 rounded-md">
+            <h2 className="text-lg font-bold mb-4 flex justify-center items-center">
+              Create New Task
+            </h2>
             <input
               type="text"
               placeholder="Title"

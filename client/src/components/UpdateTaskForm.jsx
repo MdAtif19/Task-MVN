@@ -17,8 +17,10 @@ const UpdateTaskForm = ({ taskToUpdate, onSubmit, onCancel }) => {
   };
 
   return (
-    <div className="bg-white p-8 rounded-md">
-      <h2 className="text-lg font-bold mb-4">Update Task</h2>
+    <div className="bg-gray-200 p-8 rounded-md">
+      <h2 className="text-lg font-bold mb-4 flex justify-center items-center">
+        Update Task
+      </h2>
       <input
         type="text"
         name="title"
