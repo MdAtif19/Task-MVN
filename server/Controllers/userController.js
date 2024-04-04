@@ -26,11 +26,11 @@ const registerUser = async (req, res) => {
       const errorMessage =
         "Password must be Strong.\n" +
         "At least,\n" +
-        "1. Upper case\n" +
-        "2. Lower case\n" +
-        "3. Number\n" +
-        "4. One special Character\n" +
-        "5. Length will be 8+";
+        " Upper case\n" +
+        " Lower case\n" +
+        " Number\n" +
+        " One special Character\n" +
+        " Length will be 8+";
       return res.status(400).json(errorMessage);
     }
 
