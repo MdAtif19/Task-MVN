@@ -93,8 +93,8 @@ const Login = () => {
           </span>
         </div>
         <div className="bg-gray-100 px-5 py-2">
-          <p>Email: taufiq@gmail.com</p>
-          <p>Password: Diu123456789@</p>
+          <p>Email: mdatif@gmail.com</p>
+          <p>Password: Mdatif@12345</p>
         </div>
       </div>
     </div>
